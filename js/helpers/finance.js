@@ -74,7 +74,7 @@ export default{
         let metrics = {};
         
         //For each year within the range create an object for the monthly summary of the income, cost and balance
-        for(let y = range[0];y < range[1];y++)
+        for(let y = range[0];y <= range[1];y++)
         {
             metrics[y]={};
             for(let m=0;m < 12; m++){
@@ -87,8 +87,12 @@ export default{
             let month = record.date.getMonth();
             let year = record.date.getUTCFullYear();
             let amount = parseFloat(record.amount);
-            if(amount>=0) metrics[year][month].income+= amount;
-            else metrics[year][month].cost += amount;
+            if(amount>=0) {
+                metrics[year][month].income+= amount;
+            }
+            else {
+                metrics[year][month].cost += amount;
+            }
         });
 
         //All incomes and expenses are asigned, now calculate the balance for all months
